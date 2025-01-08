@@ -86,7 +86,7 @@ function App() {
           textAlign="center"
           px={4}
           py={2}
-          bg="rgba(255, 255, 255, 255)"
+          bg="rgba(255, 255, 255, 0.7)"
           borderRadius="0.5rem"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -96,6 +96,19 @@ function App() {
           We build solutions that elevate your online presence <br />
           and drive business growth.
         </MotionText>
+
+        <MotionButton
+          as="a"
+          href="#contact"
+          size="lg"
+          mt={8}
+          colorScheme="blue"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.6 }}
+        >
+          Get Started
+        </MotionButton>
       </MotionBox>
 
       {/* About Section */}
@@ -326,15 +339,31 @@ const styles = {
     alignItems: "center",
   },
   homeSection: {
-    bgImage:
-      "url('https://images.pexels.com/photos/8294650/pexels-photo-8294650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
-    bgSize: "cover",
-    bgRepeat: "no-repeat",
-    bgPosition: "center",
-    backgroundPosition: "50% 50%",
-    "@media screen and (max-width: 768px)": {
-      backgroundPosition: "100% 50%",
+    "@keyframes bgAnimation": {
+      "0%": {
+        backgroundImage:
+          "url('https://images.pexels.com/photos/8294650/pexels-photo-8294650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
+      },
+      "25%": {
+        backgroundImage:
+          "url('https://images.pexels.com/photos/10926479/pexels-photo-10926479.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
+      },
+      "50%": {
+        backgroundImage:
+          "url('https://images.pexels.com/photos/10926480/pexels-photo-10926480.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
+      },
+      "75%": {
+        backgroundImage:
+          "url('https://images.pexels.com/photos/10926481/pexels-photo-10926481.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
+      },
+      "100%": {
+        backgroundImage:
+          "url('https://images.pexels.com/photos/10926482/pexels-photo-10926482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
+      },
     },
+    backgroundImage:
+      "url('https://images.pexels.com/photos/8294650/pexels-photo-8294650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
+    animation: "bgAnimation 30s ease-in-out infinite",
   },
   aboutSection: {
     bg: "linear-gradient(120deg, #f7f7f7, #ececec)",
@@ -409,7 +438,7 @@ const portfolio = [
 
 const teams = [
   {
-    name: "Biplob",
+    name: "Mahafizur Rahman (Biplob)",
     description: "Software Engineer",
     image: "./biplob.jpg",
   },
@@ -419,9 +448,15 @@ const teams = [
     image: "./Sanjida Akther.jpg",
   },
   {
-    name: "Rony",
+    name: "Asik",
     description: "SEO Specialist",
-    image: "./rony.jpg",
+    image:
+      "https://images.pexels.com/photos/30139862/pexels-photo-30139862.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  },
+  {
+    name: "Sudipto Paul",
+    description: "UI/UX Designer",
+    image: "./sudipto.jpg",
   },
 ];
 
@@ -432,7 +467,7 @@ const contactInfo = {
 };
 
 const socialMediaLinks = {
-  facebook: "https://www.facebook.com",
+  facebook: "https://www.facebook.com/growthstudio2",
   twitter: "https://www.twitter.com",
   instagram: "https://www.instagram.com",
 };
