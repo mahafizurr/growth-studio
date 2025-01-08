@@ -7,8 +7,10 @@ import {
   Text,
   Box,
   Button,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const MotionBox = motion(Box);
 const MotionHeading = motion(Heading);
@@ -84,7 +86,7 @@ function App() {
           textAlign="center"
           px={4}
           py={2}
-          bg="rgba(255,255,255,0.2)"
+          bg="rgba(255, 255, 255, 255)"
           borderRadius="0.5rem"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -144,6 +146,68 @@ function App() {
         </UnorderedList>
       </MotionBox>
 
+      {/* Portfolio Section */}
+      <MotionBox
+        id="portfolio"
+        sx={{ ...styles.section, ...styles.portfolioSection }}
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <Heading as="h1" size="2xl" mb={4}>
+          Portfolio
+        </Heading>
+        <UnorderedList styleType="none" padding={0}>
+          {portfolio.map((project, index) => (
+            <MotionBox
+              as="li"
+              key={index}
+              sx={styles.listItem}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+            >
+              <Text as="h3" fontWeight="bold" mb={2}>
+                {project.title}
+              </Text>
+              <Text>{project.description}</Text>
+            </MotionBox>
+          ))}
+        </UnorderedList>
+      </MotionBox>
+
+      {/* Teams Section */}
+      <MotionBox
+        id="teams"
+        sx={{ ...styles.section, ...styles.teamsSection }}
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <Heading as="h1" size="2xl" mb={4}>
+          Teams
+        </Heading>
+        <SimpleGrid columns={[1, 2, 3]} gap={6}>
+          {teams.map((team, index) => (
+            <MotionBox
+              key={index}
+              sx={styles.listItem}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+            >
+              <img src={team.image} alt={team.name} style={styles.teamImage} />
+              <Text as="h3" fontWeight="bold" mb={2}>
+                {team.name}
+              </Text>
+              <Text>{team.description}</Text>
+            </MotionBox>
+          ))}
+        </SimpleGrid>
+      </MotionBox>
+
       {/* Contact Section */}
       <MotionBox
         id="contact"
@@ -186,7 +250,7 @@ function App() {
         ^
       </MotionButton>
 
-      {/* Footer */}
+      {/* Footer with Social Media Links */}
       <Box as="footer" sx={styles.footer}>
         <Box
           sx={{
@@ -203,17 +267,31 @@ function App() {
           <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "5px",
+              gap: "10px",
+              justifyContent: "center",
             }}
           >
-            <Text fontSize="sm" color="gray.500">
-              Address:
-            </Text>
-            <Text fontSize="sm" color="gray.500">
-              1216-mirpur, Dhaka, Bangladesh
-            </Text>
+            <a
+              href={socialMediaLinks.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFacebook size={24} color="white" />
+            </a>
+            <a
+              href={socialMediaLinks.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaTwitter size={24} color="white" />
+            </a>
+            <a
+              href={socialMediaLinks.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaInstagram size={24} color="white" />
+            </a>
           </Box>
         </Box>
       </Box>
@@ -251,7 +329,12 @@ const styles = {
     bgImage:
       "url('https://images.pexels.com/photos/8294650/pexels-photo-8294650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
     bgSize: "cover",
+    bgRepeat: "no-repeat",
     bgPosition: "center",
+    backgroundPosition: "50% 50%",
+    "@media screen and (max-width: 768px)": {
+      backgroundPosition: "100% 50%",
+    },
   },
   aboutSection: {
     bg: "linear-gradient(120deg, #f7f7f7, #ececec)",
@@ -263,11 +346,35 @@ const styles = {
   },
   contactSection: {
     bg: "linear-gradient(to top, #37ecba, #72afd3)",
+    padding: "20px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    "@media screen and (max-width: 768px)": {
+      padding: "10px",
+    },
   },
   listItem: {
     borderBottom: "1px solid #ccc",
     padding: "20px",
     listStyle: "none",
+  },
+
+  portfolioSection: {
+    bg: "linear-gradient(to bottom, #333, #555)",
+    color: "#fff",
+    "@media screen and (max-width: 768px)": {
+      bg: "#333",
+    },
+  },
+
+  teamImage: {
+    borderRadius: "50%",
+    width: "200px",
+    height: "200px",
+    objectFit: "cover",
+    marginBottom: "20px",
   },
   footer: {
     padding: "10px",
@@ -284,5 +391,50 @@ const services = [
   { title: "SEO Optimization", description: "Boost search engine visibility." },
   { title: "Maintenance and Support", description: "Keep websites updated." },
 ];
+
+const portfolio = [
+  {
+    title: "Chapai Bar Association",
+    description: "This is a website for Chapai Nawabganj Bar Association. ",
+  },
+  {
+    title: "Priyo Fruits",
+    description: "This is a website for Priyo Fruits.",
+  },
+  {
+    title: "Kinder Garten School",
+    description: "This is a website for Kinder Garten School.",
+  },
+];
+
+const teams = [
+  {
+    name: "Biplob",
+    description: "Software Engineer",
+    image: "./biplob.jpg",
+  },
+  {
+    name: "Sanjida Akther Bipa",
+    description: "Designer",
+    image: "./Sanjida Akther.jpg",
+  },
+  {
+    name: "Rony",
+    description: "SEO Specialist",
+    image: "./rony.jpg",
+  },
+];
+
+const contactInfo = {
+  email: "studiogrowth2@gmail.com",
+  phone: "+880 1906553275",
+  address: "1216-mirpur, Dhaka, Bangladesh",
+};
+
+const socialMediaLinks = {
+  facebook: "https://www.facebook.com",
+  twitter: "https://www.twitter.com",
+  instagram: "https://www.instagram.com",
+};
 
 export default App;
